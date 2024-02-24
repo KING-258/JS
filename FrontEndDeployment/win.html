@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Won!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color:deepskyblue;
+            padding: 20px;
+        }
+        button {
+            padding: 1rem;
+            background-color: #191913;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>You Won!</h1>
+    <p>Moves: <span id="moves"></span></p>
+    <button id="new-game-button">New Game</button>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const moves = urlParams.get('moves');
+        document.getElementById('moves').textContent = moves;
+        document.getElementById('new-game-button').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

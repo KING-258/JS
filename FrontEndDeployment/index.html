@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Puzzle Solver</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>8 Puzzle Solver</h1>
+    <div id="puzzle-container"></div>
+    <div id="move-counter">Moves: 0</div>
+    <button id="hint-button">Hint</button>
+    <script>
+        const goalState = [[1, 2, 3], [4, 5, 6], [7, 8, 0]];
+        let moveCount = 0;
+        function heuristic(state) {
+            let distance = 0;
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    const value = state[i][j];
+                    if (value !== 0) {
+                        const targetX = (value - 1) % 3;
+                        const targetY = Math.floor((value - 1) / 3);
+                        distance += Math.abs(j - targetX) + Math.abs(i - targetY);
+                    }
+                }
+            }
+            return distance;
+        }
+        function generate(state) {
+            const possibleMoves = [];
+            const directions = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+            const [emptyX, emptyY] = findEmptyTile(state);
+
+            for (const [dx, dy] of directions) {
+                const newX = emptyX + dx;
+                const newY = emptyY + dy;
+
+                if (newX >= 0 && newX < 3 && newY >= 0 && newY < 3) {
+                    const newState = cloneState(state);
+                    [newState[emptyY][emptyX], newState[newY][newX]] = [newState[newY][newX], newState[emptyY][emptyX]];
+                    possibleMoves.push(newState);
+                }
+            }
+            return possibleMoves;
+        }
+        function findEmptyTile(state) {
+            for (let y = 0; y < 3; y++) {
+                for (let x = 0; x < 3; x++) {
+                    if (state[y][x] === 0) {
+                        return [x, y];
+                    }
+                }
+            }
+        }
+        function cloneState(state) {
+            return state.map(row => row.slice());
+        }
+        function isSolved(state) {
+            return JSON.stringify(state) === JSON.stringify(goalState);
+        }
+        function renderPuzzle(state) {
+            const puzzleContainer = document.getElementById('puzzle-container');
+            puzzleContainer.innerHTML = '';
+            state.forEach(row => {
+                const rowElement = document.createElement('div');
+                rowElement.classList.add('row');
+                row.forEach(cell => {
+                    const cellElement = document.createElement('div');
+                    cellElement.classList.add('cell');
+                    cellElement.textContent = cell === 0 ? '' : cell;
+                    rowElement.appendChild(cellElement);
+                    cellElement.addEventListener('click', () => {
+                        const [emptyX, emptyY] = findEmptyTile(state);
+                        const dx = Math.abs(emptyX - row.indexOf(cell));
+                        const dy = Math.abs(emptyY - state.indexOf(row));
+                        if ((dx === 1 && dy === 0) || (dx === 0 && dy === 1)) {
+                            [state[state.indexOf(row)][row.indexOf(cell)], state[emptyY][emptyX]] = [state[emptyY][emptyX], state[state.indexOf(row)][row.indexOf(cell)]];
+                            moveCount++;
+                            renderPuzzle(state);
+                            updateMoveCounter(moveCount);
+                            if (isSolved(state)) {
+                                window.location.href = `win.html?moves=${moveCount}`;
+                            }
+                        }
+                    });
+                });
+                puzzleContainer.appendChild(rowElement);
+            });
+        }
+        function updateMoveCounter(count) {
+            const moveCounter = document.getElementById('move-counter');
+            moveCounter.textContent = `Moves: ${count}`;
+        }
+        document.getElementById('hint-button').addEventListener('click', () => {
+            const currentState = getCurrentState();
+            const bestStep = chooseBestMove(generate(currentState));
+            renderPuzzle(bestStep);
+        });
+        function getCurrentState() {
+            const puzzleCells = document.querySelectorAll('.cell');
+            const currentState = [[], [], []];
+
+            puzzleCells.forEach((cell, index) => {
+                const row = Math.floor(index / 3);
+                currentState[row].push(cell.textContent === '' ? 0 : parseInt(cell.textContent));
+            });
+
+            return currentState;
+        }
+        function chooseBestMove(possibleMoves) {
+            let bestMove = null;
+            let minHeuristic = Infinity;
+
+            possibleMoves.forEach(move => {
+                const h = heuristic(move);
+                if (h < minHeuristic) {
+                    minHeuristic = h;
+                    bestMove = move;
+                }
+            });
+
+            return bestMove;
+        }
+        const initialState = [
+            [1, 2, 3],
+            [5, 8, 6],
+            [0, 7, 4]
+        ];
+        renderPuzzle(initialState);
+    </script>
+</body>
+</html>
