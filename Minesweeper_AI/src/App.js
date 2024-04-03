@@ -86,6 +86,7 @@ const App = () => {
       revealEmptyCells(newGrid, row, col);
     }
     setGrid(newGrid);
+    checkGameEnd(newGrid);
   };
 
   const revealEmptyCells = (grid, row, col) => {
@@ -105,6 +106,21 @@ const App = () => {
         }
       }
     });
+  };
+
+  const checkGameEnd = (grid) => {
+    const nonMineCells = gridSize * gridSize - numBombs;
+    let revealedNonMineCells = 0;
+    grid.forEach(row => {
+      row.forEach(cell => {
+        if (!cell.isMine && cell.revealed) {
+          revealedNonMineCells++;
+        }
+      });
+    });
+    if (revealedNonMineCells === nonMineCells) {
+      setGameOver(true);
+    }
   };
 
   const restartGame = () => {
