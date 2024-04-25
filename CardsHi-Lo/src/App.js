@@ -25,7 +25,7 @@ class App extends React.Component {
   higher = () => {
     const next = this.get();
     const { nxt, cur, hist } = this.state;
-    const res = this.val(next) > this.val(cur) ? 'You guessed right! It was higher.' : 'You guessed wrong! It was not higher.';
+    const res = this.val(next) >= this.val(cur) ? 'You guessed right! It was higher.' : 'You guessed wrong! It was not higher.';
     const histNew = [...hist, { current: cur, next: next, result: res }];
     this.setState({
       res,
@@ -38,7 +38,7 @@ class App extends React.Component {
   lower = () => {
     const next = this.get();
     const { nxt, cur, hist } = this.state;
-    const res = this.val(next) < this.val(cur) ? 'You guessed right! It was lower.' : 'You guessed wrong! It was not lower.';
+    const res = this.val(next) <= this.val(cur) ? 'You guessed right! It was lower.' : 'You guessed wrong! It was not lower.';
     const histNew = [...hist, { current: cur, next: next, result: res }];
     this.setState({
       res,
