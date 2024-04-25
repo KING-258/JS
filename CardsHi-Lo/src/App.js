@@ -72,8 +72,8 @@ class App extends React.Component {
               <button onClick={this.start}>Start Game</button>
             ) : (
               <>
-                <button onClick={this.higher}>Higher</button>
-                <button onClick={this.lower}>Lower</button>
+                <button onClick={this.higher}>Higher or Same</button>
+                <button onClick={this.lower}>Lower or Same</button>
               </>
             )}
           </div>
