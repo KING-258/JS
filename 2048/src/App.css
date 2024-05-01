@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-top: 50px;
+}
+
+.board {
+  display: inline-block;
+  border: 2px solid #bbada0;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 80px; /* Adjust the width of the cell */
+  height: 80px; /* Adjust the height of the cell */
+  margin: 5px; /* Adjust the margin between cells */
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 6px;
+  width: 80px; /* Set width to match the height */
+  height: 80px; /* Set height to match the width */
+}
+
+.front-page {
+  margin-top: 100px;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.options {
+  font-size: 24px;
+}
+
+.grid-size {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+  font-size: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #8f7a66;
+  color: #f9f6f2;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a39283;
+}
