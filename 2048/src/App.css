@@ -16,9 +16,9 @@
 }
 
 .cell {
-  width: 80px; /* Adjust the width of the cell */
-  height: 80px; /* Adjust the height of the cell */
-  margin: 5px; /* Adjust the margin between cells */
+  width: 80px;
+  height: 80px;
+  margin: 5px;
 }
 
 .tile {
@@ -28,8 +28,8 @@
   font-size: 24px;
   font-weight: bold;
   border-radius: 6px;
-  width: 80px; /* Set width to match the height */
-  height: 80px; /* Set height to match the width */
+  width: 80px;
+  height: 80px;
 }
 
 .front-page {
