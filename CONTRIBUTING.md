@@ -6,25 +6,17 @@
 Brief overview of the project.
 
 ### Features
-- Feature 1
-- Feature 2
-- ...
+- HTML CSS and JS used
+- There are 4 Major Projects
 
 ## Installation
-
+git clone https://github.com/KING-258/JS
 ### Requirements
-- Requirement 1
-- Requirement 2
-- ...
-
-### Instructions
-1. Step 1
-2. Step 2
-3. ...
-
-## Usage
-
+- Node Package Manager
+- ReactJS & Babel Presets
+- 3JS
+- Occasionally Used Python Libraries
 ### Example
-```python
-# Example code snippet
-print("Hello, world!")
+ - npm start
+ - webpack-dev-server --open
+ - python server.py
