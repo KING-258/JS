@@ -3,7 +3,7 @@
 ## Overview
 
 ### Description
-Brief overview of the project.
+JavaScript along ReactJS, AngularJS and Node.js with python backend. Game Implementation with Logic 
 
 ### Features
 - HTML CSS and JS used
