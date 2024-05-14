@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import avatar from './amulya_avatar_2.png';
+import avatar from './amulya_avatar_5.png';
 import project from './idea.png';
 function App() {
   const [currentSection, setCurrentSection] = useState('home');
