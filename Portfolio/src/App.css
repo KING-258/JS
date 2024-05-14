@@ -58,19 +58,21 @@ a:active {
 }
 .section {
   padding: 50px 0;
+  justify-content: left;
   border-radius: 15px;
 }
 #home {
   background-color: #3a3a3a;
 }
 #projects {
-  background-color: #3D2D23;
+  justify-content: flex-start;
+  background-color: #3a3a3a;
 }
 #about {
-  background-color: #282828;
+  background-color: #3a3a3a;
 }
 #contact {
-  background-color: #975797;
+  background-color: #3a3a3a;
 }
 body {
   background-color: #1C1F21;
@@ -95,14 +97,12 @@ h1 {
   margin-left: auto;
 }
 .project-container {
-  margin-left: 20px;
+  margin-left: 70px;
   border-radius: 20px;
-  overflow: hidden;
-  margin-top: 25px;
+  margin-top: 50px;
 }
 .project {
-  display: block;
-  width: 100;
-  height: auto;
-  border-radius: 20px;
+  width: 350;
+  height: 700;
+  border-radius: 25px;
 }
