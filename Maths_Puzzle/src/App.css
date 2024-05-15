@@ -1,0 +1,117 @@
+.App {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #333, #444);
+  color: #fff;
+}
+.start-screen, .win-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+}
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #555;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #777;
+}
+.game {
+  text-align: center;
+  background: #555;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.score {
+  margin-top: 20px;
+  font-size: 1.5em;
+}
+.question {
+  margin: 20px 0;
+}
+.question-number {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.slot-machine {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  border: 2px solid #777;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.slot {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  background-color: #fff;
+  text-shadow: 1px 1px 1px #ddd;
+  margin: 0 10px;
+  color: #000;
+}
+.options {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.options button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #555;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.options button:hover {
+  background: #197af8;
+  transform: scale(1.2);
+}
+.options button.correct {
+  background: #4caf50;
+  color: white;
+}
+.options button.incorrect {
+  background: #f44336;
+  color: white;
+}
+.timer {
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+.win-screen {
+  text-align: center;
+}
+.win-screen h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+.win-screen p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
