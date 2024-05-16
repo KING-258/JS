@@ -174,14 +174,15 @@ function App() {
     <div className="App">
       {!gameStarted && !gameOver ? (
         <div className="start-screen">
-          <h1>Number Slot Machine</h1>
+          <h1><strong>Maths Number Puzzles</strong></h1>
           <input
             type="text"
             placeholder="Enter your name"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
           />
-          <button onClick={startGame}>Start</button>
+          <button onClick={startGame}>Start</button><br></br>
+          For every Correct Answer <strong>+3 </strong>points are awarded<br></br>For Every Wrong Answer <strong>-1 </strong>points are awarded<br></br>For unattempted questions <strong>0 </strong>points are awarded.
         </div>
       ) : gameStarted ? (
         <Game playerName={playerName} onGameOver={handleGameOver} />
