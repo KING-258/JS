@@ -24,24 +24,3 @@ Welcome to the JavaScript Projects repository! This collection features a wide v
    ```bash
     npm start
     ```
-
-### Contributing
-
-We welcome contributions from everyone. To contribute:
-
-1. **Fork the Repository**: Click the 'Fork' button at the top right of this page.
-2. **Create a Branch**:
-    ```bash
-    git checkout -b your-branch-name
-    ```
-3. **Commit Your Changes**:
-    ```bash
-    git commit -m 'Add a new project/feature/fix'
-    ```
-4. **Push to Your Fork**:
-    ```bash
-    git push origin your-branch-name
-    ```
-5. **Create a Pull Request**: Open a pull request to the `main` branch of this repository.
-
-For detailed contribution guidelines, please refer to the `CONTRIBUTING.md` file.
