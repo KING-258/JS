@@ -1,0 +1,75 @@
+.App {
+  text-align: center;
+  background-color: #fff5e6;
+  color: #663300;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.header-text {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.cursor {
+  font-size: 2rem;
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+textarea {
+  padding: 10px;
+  font-size: 1.2rem;
+  margin: 20px;
+  border: 2px solid #cc9966;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+  resize: none;
+}
+
+textarea:focus {
+  border-color: #663300;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #cc9966;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #b37700;
+}
