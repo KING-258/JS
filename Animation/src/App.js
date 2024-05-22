@@ -13,7 +13,7 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Typing Anim Demo</h1>
+        <h1>Typing Animation</h1>
         <textarea
           placeholder="Type something..."
           value={txt}
