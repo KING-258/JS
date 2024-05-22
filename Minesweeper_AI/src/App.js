@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-
-const generateEmptyGrid = (numRows, numCols) => {
+const genEmptyGrid = (rows, cols) => {
   const grid = [];
-  for (let i = 0; i < numRows; i++) {
-    grid.push(Array.from(Array(numCols), () => ({
+  for (let i = 0; i < rows; i++) {
+    grid.push(Array.from(Array(cols), () => ({
       isMine: false,
       revealed: false,
       neighborCount: 0
@@ -12,157 +11,144 @@ const generateEmptyGrid = (numRows, numCols) => {
   }
   return grid;
 }
-
 const App = () => {
-  const [gridSize, setGridSize] = useState(null);
+  const [size, setSize] = useState(null);
   const [grid, setGrid] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [numBombs, setNumBombs] = useState(0);
+  const [over, setOver] = useState(false);
+  const [started, setStarted] = useState(false);
+  const [bombs, setBombs] = useState(0);
   const [time, setTime] = useState(0);
-  const [suggestedCell, setSuggestedCell] = useState(null);
-  const [suggestionsRemaining, setSuggestionsRemaining] = useState(3); 
+  const [suggested, setSuggested] = useState(null);
+  const [hints, setHints] = useState(3); 
   const timerRef = useRef(null);
-
-  const handleGridSizeSelection = (size) => {
-    setGridSize(size);
-    setGameStarted(false); 
-    setSuggestionsRemaining(3);
+  const selectSize = (size) => {
+    setSize(size);
+    setStarted(false); 
+    setHints(3);
   };
-
   useEffect(() => {
-    if (gridSize) {
-      const numRows = gridSize;
-      const numCols = gridSize;
-      const newGrid = generateEmptyGrid(numRows, numCols);
-      const numMines = Math.floor(numRows * numCols * 0.15); 
-      setNumBombs(numMines);
-      for (let i = 0; i < numMines; i++) {
-        let randRow = Math.floor(Math.random() * numRows);
-        let randCol = Math.floor(Math.random() * numCols);
-        while (newGrid[randRow][randCol].isMine) {
-          randRow = Math.floor(Math.random() * numRows);
-          randCol = Math.floor(Math.random() * numCols);
+    if (size) {
+      const rows = size;
+      const cols = size;
+      const newGrid = genEmptyGrid(rows, cols);
+      const mines = Math.floor(rows * cols * 0.15); 
+      setBombs(mines);
+      for (let i = 0; i < mines; i++) {
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * cols);
+        while (newGrid[r][c].isMine) {
+          r = Math.floor(Math.random() * rows);
+          c = Math.floor(Math.random() * cols);
         }
-        newGrid[randRow][randCol].isMine = true;
-        updateNeighborCounts(newGrid, randRow, randCol);
+        newGrid[r][c].isMine = true;
+        updateNeighbors(newGrid, r, c);
       }
       setGrid(newGrid);
     }
-  }, [gridSize]);
-
+  }, [size]);
   useEffect(() => {
-    if (gameStarted && !gameOver) {
+    if (started && !over) {
       timerRef.current = setInterval(() => {
-        setTime(prevTime => prevTime + 1);
+        setTime(prev => prev + 1);
       }, 1000);
     } else {
       clearInterval(timerRef.current);
     }
     return () => clearInterval(timerRef.current);
-  }, [gameStarted, gameOver]);
-
-  const updateNeighborCounts = (grid, row, col) => {
-    const directions = [
+  }, [started, over]);
+  const updateNeighbors = (grid, row, col) => {
+    const dirs = [
       [1, 0], [1, 1], [0, 1], [-1, 1],
       [-1, 0], [-1, -1], [0, -1], [1, -1]
     ];
-    directions.forEach(([dRow, dCol]) => {
-      const newRow = row + dRow;
-      const newCol = col + dCol;
-      if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
+    dirs.forEach(([dr, dc]) => {
+      const newRow = row + dr;
+      const newCol = col + dc;
+      if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
         grid[newRow][newCol].neighborCount++;
       }
     });
   };
-
-  const revealCell = (row, col) => {
-    if (gameOver || grid[row][col].revealed) return;
+  const reveal = (row, col) => {
+    if (over || grid[row][col].revealed) return;
     const newGrid = JSON.parse(JSON.stringify(grid));
     newGrid[row][col].revealed = true;
     if (newGrid[row][col].isMine) {
-      setGameOver(true);
+      setOver(true);
     } else if (newGrid[row][col].neighborCount === 0) {
-      revealEmptyCells(newGrid, row, col);
+      revealEmpty(newGrid, row, col);
     }
     setGrid(newGrid);
-    checkGameEnd(newGrid);
+    checkEnd(newGrid);
   };
-
-  const revealEmptyCells = (grid, row, col) => {
-    const directions = [
+  const revealEmpty = (grid, row, col) => {
+    const dirs = [
       [1, 0], [1, 1], [0, 1], [-1, 1],
       [-1, 0], [-1, -1], [0, -1], [1, -1]
     ];
-    directions.forEach(([dRow, dCol]) => {
-      const newRow = row + dRow;
-      const newCol = col + dCol;
-      if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
+    dirs.forEach(([dr, dc]) => {
+      const newRow = row + dr;
+      const newCol = col + dc;
+      if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
         if (!grid[newRow][newCol].revealed) {
           grid[newRow][newCol].revealed = true;
           if (grid[newRow][newCol].neighborCount === 0) {
-            revealEmptyCells(grid, newRow, newCol);
+            revealEmpty(grid, newRow, newCol);
           }
         }
       }
     });
   };
-
-  const checkGameEnd = (grid) => {
-    const nonMineCells = gridSize * gridSize - numBombs;
-    let revealedNonMineCells = 0;
+  const checkEnd = (grid) => {
+    const nonMines = size * size - bombs;
+    let revealedCells = 0;
     grid.forEach(row => {
       row.forEach(cell => {
         if (!cell.isMine && cell.revealed) {
-          revealedNonMineCells++;
+          revealedCells++;
         }
       });
     });
-    if (revealedNonMineCells === nonMineCells) {
-      setGameOver(true);
+    if (revealedCells === nonMines) {
+      setOver(true);
     }
   };
-
-  const restartGame = () => {
-    setGameOver(false);
+  const restart = () => {
+    setOver(false);
     setTime(0);
-    setGameStarted(false);
+    setStarted(false);
     setGrid([]);
-    setGridSize(null);
-    setSuggestionsRemaining(3);
+    setSize(null);
+    setHints(3);
   };
-
-  const startGame = () => {
-    setGameStarted(true);
+  const start = () => {
+    setStarted(true);
   };
-
-  const suggestMove = () => {
-    if (suggestionsRemaining > 0) {
-      const shuffledCoordinates = shuffleCoordinates(gridSize);
-      for (const [row, col] of shuffledCoordinates) {
+  const suggest = () => {
+    if (hints > 0) {
+      const shuffledCoords = shuffleCoords(size);
+      for (const [row, col] of shuffledCoords) {
         if (!grid[row][col].revealed && !grid[row][col].isMine) {
-          setSuggestedCell({ row, col });
-          setSuggestionsRemaining(prev => prev - 1);
+          setSuggested({ row, col });
+          setHints(prev => prev - 1);
           return;
         }
       }
     }
   };
-
-  const shuffleCoordinates = (gridSize) => {
-    const coordinates = [];
-    for (let i = 0; i < gridSize; i++) {
-      for (let j = 0; j < gridSize; j++) {
-        coordinates.push([i, j]);
+  const shuffleCoords = (size) => {
+    const coords = [];
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        coords.push([i, j]);
       }
     }
-    for (let i = coordinates.length - 1; i > 0; i--) {
+    for (let i = coords.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [coordinates[i], coordinates[j]] = [coordinates[j], coordinates[i]];
+      [coords[i], coords[j]] = [coords[j], coords[i]];
     }
-    return coordinates;
+    return coords;
   };
-
   const renderCell = (row, col) => {
     const cell = grid[row][col];
     let content = '';
@@ -173,44 +159,41 @@ const App = () => {
         content = cell.neighborCount;
       }
     }
-
     return (
       <div
-        className={`cell ${cell.revealed ? 'revealed' : ''} ${suggestedCell && suggestedCell.row === row && suggestedCell.col === col ? 'suggested' : ''}`}
-        onClick={() => revealCell(row, col)}
+        className={`cell ${cell.revealed ? 'revealed' : ''} ${suggested && suggested.row === row && suggested.col === col ? 'suggested' : ''}`}
+        onClick={() => reveal(row, col)}
       >
         {content}
       </div>
     );
   };
-
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
-
   return (
     <div className="App">
       <h1>Minesweeper</h1>
-      {gridSize === null && (
+      {size === null && (
         <div className="size-selection">
-          <button onClick={() => handleGridSizeSelection(8)}>8x8</button>
-          <button onClick={() => handleGridSizeSelection(12)}>12x12</button>
-          <button onClick={() => handleGridSizeSelection(16)}>16x16</button>
+          <button onClick={() => selectSize(8)}>8x8</button>
+          <button onClick={() => selectSize(12)}>12x12</button>
+          <button onClick={() => selectSize(16)}>16x16</button>
         </div>
       )}
-      {gridSize && !gameStarted && (
-        <button onClick={startGame}>Start</button>
+      {size && !started && (
+        <button onClick={start}>Start</button>
       )}
-      {gridSize && gameStarted && (
+      {size && started && (
         <>
           <div className="game-info">
-            <div>Bombs: {numBombs}</div>
+            <div>Bombs: {bombs}</div>
             <div>Time: {formatTime(time)}</div>
-            <div>Suggestions Remaining: {suggestionsRemaining}</div> {}
-            <button onClick={restartGame}>Restart</button>
-            <button onClick={suggestMove} disabled={suggestionsRemaining === 0}>Suggest Move</button> {}
+            <div>Hints: {hints}</div>
+            <button onClick={restart}>Restart</button>
+            <button onClick={suggest} disabled={hints === 0}>Hint</button>
           </div>
           <div className="grid">
             {grid.map((row, rowIndex) => (
@@ -223,11 +206,10 @@ const App = () => {
               </div>
             ))}
           </div>
-          {gameOver && <h2>Game Over</h2>}
+          {over && <h2>Game Over</h2>}
         </>
       )}
     </div>
   );
 }
-
 export default App;
