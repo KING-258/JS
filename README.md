@@ -16,11 +16,13 @@ Welcome to the JavaScript Projects repository! This collection features a wide v
 
 1. **Clone the Repository**: 
     ```bash
-    git clone https://github.com/yourusername/js-projects.git
+    git clone https://github.com/KING-258/JS
     ```
-2. **Navigate to a Project**: Explore the `projects` directory to find the project you want to work on.
+2. **Navigate to a Project**: Explore the `JS` directory to find the project you want to work on.
 3. **Follow the Instructions**: Each project folder contains a `README.md` with setup instructions and detailed information.
-4. **Run the Project**: Follow the setup instructions to run the project locally.
+4. **Run the Project**: Follow the setup instructions to run the project locally using ```bash
+   npm start
+    ```
 
 ### Contributing
 
