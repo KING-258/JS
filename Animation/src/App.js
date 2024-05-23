@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
-
 function Home() {
   const [txt, setTxt] = useState('');
   const nav = useNavigate();
-
   const startAnim = () => {
     nav('/anim', { state: { txt } });
   };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -26,7 +23,6 @@ function Home() {
     </div>
   );
 }
-
 function Anim() {
   const { state } = useLocation();
   const txt = state ? state.txt : '';
@@ -34,7 +30,6 @@ function Anim() {
   const [idx, setIdx] = useState(0);
   const [cur, setCur] = useState(true);
   const [animating, setAnimating] = useState(true);
-
   useEffect(() => {
     if (animating && idx < txt.length) {
       const timeoutId = setTimeout(() => {
@@ -47,7 +42,6 @@ function Anim() {
       setCur(false);
     }
   }, [idx, animating, txt]);
-
   useEffect(() => {
     if (animating) {
       const interval = setInterval(() => {
@@ -56,7 +50,6 @@ function Anim() {
       return () => clearInterval(interval);
     }
   }, [animating]);
-
   return (
     <div className="App">
       <header className="App-header">
@@ -70,7 +63,6 @@ function Anim() {
     </div>
   );
 }
-
 function App() {
   return (
     <Router>
@@ -81,5 +73,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
