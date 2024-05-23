@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import avatar from './amulya_avatar_5.png';
-import project from './idea.png';
+import project from './idea4.png';
 function App() {
   const [currentSection, setCurrentSection] = useState('home');
   const handleNavClick = (section) => {
@@ -50,11 +50,13 @@ function Home() {
                   <li> MySQL/SQLPlus</li>
                   <li> Python</li>
                   <li> HTML CSS and Javascript</li>
+                  <li> Rust</li>
+                  <li> GO</li>
                 </ul>
                 </strong>
               </li>
             </ul>
-            &emsp; My SkillSets extends to <strong>Data Structures and Algorithms(DSA), Object Oriented Programming(OOPs), Power Bi and Data Analytics</strong> 
+            &emsp; My SkillSets extends to <strong>Data Structures and Algorithms(DSA), Object Oriented <br></br>&emsp;Programming(OOPs), Power Bi and Data Analytics</strong> 
           </p>
         </div>
       </section>
@@ -83,6 +85,7 @@ function Projects() {
                   <li> Nokia Snake Game : <a href='https://github.com/KING-258/JS/tree/main/Snake_Xenia'>🔗</a></li>
                   <li> Chrome Dino with <strong>3JS</strong> : <a href='https://github.com/KING-258/JS/tree/main/Dino_Chrome'>🔗</a></li>
                   <li> Maths Puzzle : <a href='https://github.com/KING-258/JS/tree/main/Maths_Puzzle'>🔗</a></li>
+                  <li> Text Paragraph Animations : <a href='https://github.com/KING-258/JS/tree/main/Animation'>🔗</a></li>
                 </ul>
               </li>
               <li>
