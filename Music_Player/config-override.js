@@ -1,0 +1,17 @@
+const webpack = require('webpack');
+
+module.exports = function override(config, env) {
+  config.resolve.fallback = {
+    ...config.resolve.fallback,
+    fs: false,
+    buffer: require.resolve('buffer/')
+  };
+
+  config.plugins = (config.plugins || []).concat([
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    })
+  ]);
+
+  return config;
+};
