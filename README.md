@@ -1,7 +1,7 @@
 # Hi there, I'm KING-258 👋
-![GitHub Stats](https://readme-md-stats.vercel.app/api?username=KING-258&theme=dark)
+![GitHub Stats](https://readme-md-stats.vercel.app/api?username=KING-258&theme=tokyonight)
 
-![Top Langs](https://readme-md-stats.vercel.app/api/top-langs/?username=KING-258)
+![Top Langs](https://readme-md-stats.vercel.app/api/top-langs/?username=KING-258&theme=tokyonight)
 
 <div> 
   <a href="https://github.com/KING-258" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
