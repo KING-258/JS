@@ -1,5 +1,5 @@
 # Created by KING-258
-### 3JS Project
+## 3JS Project
 This is a project built using Three.js, a JavaScript library for creating 3D graphics in a web browser.
 
 ### Running Project Locally 
