@@ -1,7 +1,16 @@
 # Hi there, I'm KING-258 👋
-![GitHub Stats](https://readme-md-stats.vercel.app/api?username=KING-258&theme=tokyonight)
-
-![Top Langs](https://readme-md-stats.vercel.app/api/top-langs/?username=KING-258&theme=tokyonight)
+<div align="center">
+  <h3 align="center"> GitHub Statistics:</h3>
+  <img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=KING-258&theme=algolia"height="190em" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=KING-258&theme=github-dark"height="230em" alt="Activity Graph" />
+    <a href="https://github.com/KING-258">
+    <img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=KING-258&theme=2077" height="180em" />
+    <img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=KING-258&theme=2077" height="180em" />
+    <br>
+    <img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=KING-258&theme=2077" height="180em" />
+    <img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=KING-258&theme=2077" height="180em" />
+  </a>
+</div>
 
 <div> 
   <a href="https://github.com/KING-258" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
